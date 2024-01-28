@@ -12,13 +12,11 @@ py -m venv venv
 pip install -r requirements.txt
 pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu118
 ```
-- You can modify/create new .env files(.env contains the default settings/base settings)
-- Put the sd xl checkpoint that you use in .\models\
-- Put the sd 1.5/2.0/2.1 checkpoint that you use in .\models\1.5\
-- Put the sd xl LoRA that you use in .\models\Lora\
-- Put the sd 1.5/2.0/2.1 LoRA that you use in .\models\Lora\1.5\
-- Put the sd VAE that you use in .\models\VAE\
-- Put the sd negative embeddings that you use in .\models\embeddings\
+
+- Download from hugginface or any similar website every checkpoint that you use and put them into ./models/ if they are stable diffusion xl models or ./models/1.5/ if they are stable diffusion 1.5/2.0/2.1 models
+- Download from hugginface or any similar website every LoRA that you use and put them into ./models/LoRA if they are stable diffusion xl LoRA or ./models/1.5/ if they are stable diffusion 1.5/2.0/2.1 LoRA
+- Download from hugginface or any similar website every VAE that you use and put them into ./models/VAE/
+- Download from hugginface or any similar website every negative embeddings that you use and put them into ./embeddings/
 
 # Compel
 In the prompt/negative prompt you can use the "prompt weighting":
