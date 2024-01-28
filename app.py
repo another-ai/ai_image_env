@@ -242,11 +242,7 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
         max_n_images_gif = cycles
     x_cycle = 1
 
-    if best_prompt_search:
-        cycles = 1 # end cycles after guidance_scale = 7 or 11
-    
-
-    while cycles == 0 or x_cycle <= cycles or best_prompt_search:
+    while cycles == 0 or x_cycle <= cycles:
         if cycles > 0:
             print(f"Image n.{x_cycle} of {cycles}")
   
@@ -285,17 +281,7 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
             width_ = int(os.getenv("width", "512"))
             height_ = int(os.getenv("height", "768"))
 
-
-        if best_prompt_search:
-            if turbo_lcm:
-                guidance_scale = 1 + ((x_cycle - 1) * 0.5) # from 1 to 7
-                if guidance_scale == 7:
-                    best_prompt_search = False
-            else:
-                guidance_scale = 5 + ((x_cycle - 1) * 0.5) # from 5 to 11
-                if guidance_scale == 11:
-                    best_prompt_search = False
-        elif turbo_lcm:  
+        if turbo_lcm:  
             if sd_xl:
                 guidance_scale = 2 # default = 2, sd_xl turbo with guidance scale = from 0 to 3.5
             else:
@@ -366,7 +352,7 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
             # if not sd_xl:
             #    conditioning, negative_conditioning = get_pipeline_embeds(pipeline, prompt, negative_prompt, device_, truncation_option)
 
-        if random_seed and best_prompt_search == False: 
+        if random_seed: 
             input_seed = random.randint(0, 9999999999)
         else:
             input_seed = int(input_seed)
@@ -507,9 +493,6 @@ def main_def(env_loaded = False, env_file="", main_dir="./", prompt_input="", cy
     random_seed = os.getenv("random_seed", "true").lower() == "true"
     input_seed = int(os.getenv("input_seed", "1"))
     truncation_option = os.getenv("truncation_option", "false").lower() == "true"
-    best_prompt_search = os.getenv("best_prompt_search", "false").lower() == "true" # Same seed, same prompt, same negative prompt; guidance_scale from 1-5 to 7-11
-    if best_prompt_search:
-        print("best_prompt_search ENABLED")
 
     image_print(
             env_loaded = env_loaded,
