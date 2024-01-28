@@ -39,5 +39,8 @@ In the prompt/negative prompt you can use the "prompt weighting":
 ```
 - in this example the cat(+) is MORE important that the ball(-)
 
+# Version
+- v1: First Version
+
 # Support:
 - ko-fi: (https://ko-fi.com/shiroppo)
