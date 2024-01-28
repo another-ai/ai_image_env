@@ -1,6 +1,7 @@
 # ai_image_env
 
 A browser interface based on Gradio library for Stable Diffusion, input from .env files for an easy image creation.
+![](src/ai_image_env.png)
 
 # Installation:
 
