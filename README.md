@@ -36,3 +36,8 @@ In the prompt/negative prompt you can use the "prompt weighting":
 - Example: "a grey cat++ playing with a ball----"
 ```
 - in this example the cat(+) is MORE important that the ball(-)
+
+# Support:
+- ko-fi: (https://ko-fi.com/shiroppo)
+- Patreon: (https://www.patreon.com/ai_image_env)
+
