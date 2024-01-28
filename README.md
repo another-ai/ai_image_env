@@ -20,7 +20,7 @@ py app_gradio.py
 - in the gradio browser page select the .env file that you prefer
 - in the gradio browser page select the cycles(how many images you want)
 - click "Submit"
-- you can find the output in the .\image.\_today_date_\ directory
+- you can find the output in the ./image/_today_date_/ directory
 
 - Download from hugginface or any similar website every checkpoint that you use and put them into ./models/ if they are stable diffusion xl models or ./models/1.5/ if they are stable diffusion 1.5/2.0/2.1 models
 - Download from hugginface or any similar website every LoRA that you use and put them into ./models/LoRA if they are stable diffusion xl LoRA or ./models/1.5/ if they are stable diffusion 1.5/2.0/2.1 LoRA
