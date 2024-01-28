@@ -17,11 +17,7 @@ pip install -r requirements.txt
 pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu118
 ```
 # Run
-- On terminal:
-```bash
-.\venv\Scripts\activate
-py app_gradio.py
-```
+- Click on app_gradio.bat
 - on your favourite browser digit on address bar: http://127.0.0.1:7860/
 - select the .env file that you prefer
 - select the cycles(how many images you want)
