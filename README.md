@@ -12,3 +12,16 @@ py -m venv venv
 pip install -r requirements.txt
 pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu118
 ```
+-You can modify/create new .env files
+-Put the sd xl checkpoint that you use in .\models\
+-Put the sd 1.5/2.0/2.1 checkpoint that you use in .\models\1.5\
+-Put the sd xl LoRA that you use in .\models\Lora\
+-Put the sd 1.5/2.0/2.1 LoRA that you use in .\models\Lora\1.5\
+-Put the sd negative embeddings that you use in .\models\embeddings\
+
+# Compel
+In the prompt/negative prompt you can use the "prompt weighting":
+```bash
+- Example: "a red cat++ playing with a ball----"
+```
+- in this example the cat(+) is MORE important that the ball(-)
