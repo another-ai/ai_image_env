@@ -3,7 +3,6 @@ import os
 path = os.path.abspath("src")
 sys.path.append(path)
 from diffusers import StableDiffusionPipeline, StableDiffusionXLPipeline, AutoencoderKL
-# from diffusers import DDIMScheduler
 from diffusers import EulerAncestralDiscreteScheduler # Euler a	EulerAncestralDiscreteScheduler	init with use_karras_sigmas=True from https://huggingface.co/docs/diffusers/main/en/api/schedulers/overview
 from diffusers import DPMSolverMultistepScheduler # DPM++ 2M Karras	DPMSolverMultistepScheduler	init with use_karras_sigmas=True from https://huggingface.co/docs/diffusers/main/en/api/schedulers/overview
 from diffusers import DPMSolverSinglestepScheduler # DPM++ SDE Karras	DPMSolverSinglestepScheduler init with use_karras_sigmas=True from https://huggingface.co/docs/diffusers/main/en/api/schedulers/overview
@@ -13,11 +12,8 @@ import random
 import image_save_file
 import create_gif
 import app_retnet
-# import app_audio
-# from huggingface_hub import login
 import time
 import hashlib
-# import transformers
 from dotenv import load_dotenv
 import re
 from wildcard_scene import wildcard_scene_def as random_wild
@@ -230,12 +226,11 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
     if embeddings[0] != "":  
         for embedding in embeddings:
             i = i + 1
-            pipeline.load_textual_inversion("./src/embeddings/"+embedding, token=os.path.splitext(os.path.basename(embedding))[0])
-            # exemple: pipeline.load_textual_inversion("./src/embeddings/bad_prompt_version2.pt", token="bad_prompt_version2")
+            pipeline.load_textual_inversion("./embeddings/"+embedding, token=os.path.splitext(os.path.basename(embedding))[0])
             if i == 1:
-                txt_file_embedding = ', TI hashes: "' + os.path.splitext(os.path.basename(embedding))[0] + ': ' + calculate_sha256("./src/embeddings/"+embedding, 12)      
+                txt_file_embedding = ', TI hashes: "' + os.path.splitext(os.path.basename(embedding))[0] + ': ' + calculate_sha256("./embeddings/"+embedding, 12)      
             else:
-                txt_file_embedding = txt_file_embedding + ", " + os.path.splitext(os.path.basename(embedding))[0] + ': ' + calculate_sha256("./src/embeddings/"+embedding, 12) 
+                txt_file_embedding = txt_file_embedding + ", " + os.path.splitext(os.path.basename(embedding))[0] + ': ' + calculate_sha256("./embeddings/"+embedding, 12) 
         txt_file_embedding = txt_file_embedding + '"'  
     else:
         txt_file_embedding = ""   
