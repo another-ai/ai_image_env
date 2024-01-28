@@ -416,23 +416,16 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
 
             if (x_cycle == 1) and (FirstImage):
                 FirstImage = False
-                if create_story and device_ == "cuda":
-                    torch.cuda.empty_cache()
                 if directory_save == "":
-                    file_path = image_save_file.save_file(image, txt_file_data, True, create_story, prompt, env_file)
+                    file_path = image_save_file.save_file(image, txt_file_data, True, False, prompt, env_file)
                 else:
                     file_path = image_save_file.save_file_alt(image, txt_file_data, directory_save)
-                if create_story and device_ == "cuda":
-                    torch.cuda.empty_cache()
             else:
                 if directory_save == "":
                     file_path = image_save_file.save_file(image, txt_file_data, False, False,"",env_file)
                 else:
                     file_path = image_save_file.save_file_alt(image, txt_file_data, directory_save)
                 FirstImage = False
-        if gif_creation:
-            if cycles > 1 and x_cycle == max_n_images_gif and file_path != "": # at least 2 images, max 50 images
-                create_gif.create_gif_def(os.path.dirname(file_path), os.path.splitext(os.path.basename(file_path))[0], max_n_images_gif)
         x_cycle = x_cycle + 1
 
     if model_file_lora[0] != "": 
@@ -473,7 +466,7 @@ def main_def(env_loaded = False, env_file="", main_dir="./", prompt_input="", cy
     input_seed = int(os.getenv("input_seed", "1"))
     truncation_option = os.getenv("truncation_option", "false").lower() == "true"
 
-    image_print(
+    return image_print(
             env_loaded = env_loaded,
             env_file = env_file,
             main_dir=main_dir,

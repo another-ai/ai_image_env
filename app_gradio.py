@@ -99,4 +99,4 @@ if __name__ == "__main__":
         allow_flagging="never"
         # live=True
     )
-    interface.launch()
+    interface.launch(share=False)
