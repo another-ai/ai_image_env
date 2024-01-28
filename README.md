@@ -23,6 +23,6 @@ pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2 --ind
 # Compel
 In the prompt/negative prompt you can use the "prompt weighting":
 ```bash
-- Example: "a red cat++ playing with a ball----"
+- Example: "a green cat++ playing with a ball----"
 ```
 - in this example the cat(+) is MORE important that the ball(-)
