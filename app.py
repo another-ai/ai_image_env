@@ -10,8 +10,6 @@ from diffusers import LCMScheduler
 import torch
 import random
 import image_save_file
-import create_gif
-import app_retnet
 import time
 import hashlib
 from dotenv import load_dotenv
@@ -84,7 +82,7 @@ def get_pipeline_embeds(pipeline, prompt, negative_prompt, device, truncation_op
 
     return torch.cat(concat_embeds, dim=1), torch.cat(neg_embeds, dim=1)
 
-def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, negative_prompt, sd_xl, clip_skip, turbo_lcm, no_vae, dynamic_prompt, random_seed, input_seed, cycles, truncation_option, gif_creation, create_story, best_prompt_search, random_dimension, directory_save):
+def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, negative_prompt, sd_xl, clip_skip, turbo_lcm, no_vae, dynamic_prompt, random_seed, input_seed, cycles, truncation_option, directory_save):
     def remove_last_comma(sentence):
         if len(sentence) > 0 and sentence[-1] == ',':
             sentence_without_comma = sentence[:-1]
@@ -339,13 +337,6 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
             prompt = prompt + prompt_action_input
         else:
             prompt = prompt_input
-
-        if dynamic_prompt > 0:
-            if prompt[-1] != ",":
-                prompt = prompt + ","
-            banned_words = os.getenv("banned_words", "").split(",")
-            prompt = app_retnet.main_def(prompt_input=prompt, max_tokens=dynamic_prompt, DEVICE="cpu", banned_words=banned_words)
-            prompt = remove_duplicates(prompt)
 
         prompt = remove_last_comma(prompt)
         prompt = prompt.strip()

@@ -1,7 +1,6 @@
 import os
 from datetime import datetime as date_time
 import re
-import app_story
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
@@ -73,8 +72,6 @@ def save_file(image_file, txt_file_data_file, new_folder, create_story, prompt="
         file_path = f"{directory_path}/{file_name}"
         image_file.save(file_path)
         add_metadata_file(file_path, txt_file_data_file, env_file_text)
-        if create_story:
-            app_story.main_def(file_path, prompt, env_file)
     return file_path
 
 def save_file_alt(image_file, txt_file_data_file, directory_save,env_file_text):
