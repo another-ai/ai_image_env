@@ -22,19 +22,15 @@ def image_print_create(file_input_name, cycles):
                     import subprocess
                     subprocess.run(["attrib","+H","./env/merged_file.env"],check=True)
 
-                load_dotenv("./env/merged_file.env") # env_file overwrite ./env/.env
+                load_dotenv("./env/merged_file.env")
                 env_loaded = True
                 print("merged_file.env loaded")   
         else:
-            # Carica l'immagine PNG
             image = Image.open(file_input_name)
 
-            # Ottieni il metadata dell'immagine
             metadata = image.info
 
-            # Verifica se il parametro 'env' è presente nei metadata
             if 'env' in metadata:
-                # Leggi il contenuto del parametro 'env'
                 env_content = metadata['env']
                 env_file = "file"
 
@@ -52,7 +48,7 @@ def image_print_create(file_input_name, cycles):
                     import subprocess
                     subprocess.run(["attrib","+H","./env/merged_file.env"],check=True)
 
-                load_dotenv("./env/merged_file.env") # env_file overwrite ./env/.env
+                load_dotenv("./env/merged_file.env")
                 env_loaded = True
                 print("merged_file.env loaded")
             else:
@@ -77,8 +73,8 @@ def image_print_create(file_input_name, cycles):
             print(f"{env_file} loaded")
 
     prompt_input = os.getenv("prompt_input","1girl")
-    cycles = cycles # int(os.getenv("cycles", "10"))
-    dynamic_prompt = int(os.getenv("dynamic_prompt", "0")) # number means max new token, 64 = default, 0 = off
+    cycles = cycles
+    dynamic_prompt = int(os.getenv("dynamic_prompt", "0"))
     directory_save = ""
     main_dir=os.getenv("main_dir","./")
     if main_dir[-1] != "/":
@@ -95,8 +91,7 @@ if __name__ == "__main__":
         fn=image_print_create,
         inputs=["file",gr.Number(value=1, label="Cycles")],
         outputs=["image"],
-        title="Image Create", # description="SD-Easy",
+        title="Image Create",
         allow_flagging="never"
-        # live=True
     )
     interface.launch(share=False)

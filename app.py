@@ -5,7 +5,7 @@ sys.path.append(path)
 from diffusers import StableDiffusionPipeline, StableDiffusionXLPipeline, AutoencoderKL
 from diffusers import EulerAncestralDiscreteScheduler # Euler a	EulerAncestralDiscreteScheduler	init with use_karras_sigmas=True from https://huggingface.co/docs/diffusers/main/en/api/schedulers/overview
 from diffusers import DPMSolverMultistepScheduler # DPM++ 2M Karras	DPMSolverMultistepScheduler	init with use_karras_sigmas=True from https://huggingface.co/docs/diffusers/main/en/api/schedulers/overview
-from diffusers import DPMSolverSinglestepScheduler # DPM++ SDE Karras	DPMSolverSinglestepScheduler init with use_karras_sigmas=True from https://huggingface.co/docs/diffusers/main/en/api/schedulers/overview
+from diffusers import DPMSolverSinglestepScheduler # DPM++ SDE Karras DPMSolverSinglestepScheduler init with use_karras_sigmas=True from https://huggingface.co/docs/diffusers/main/en/api/schedulers/overview
 from diffusers import LCMScheduler
 import torch
 import random
@@ -31,7 +31,7 @@ def is_completely_black(image):
             return False
     return True
 
-def calculate_sha256(filename, cut=10): # for everything except for LoRA
+def calculate_sha256(filename, cut=10):
     hash_sha256 = hashlib.sha256()
     blksize = 1024 * 1024
 
@@ -40,7 +40,7 @@ def calculate_sha256(filename, cut=10): # for everything except for LoRA
             hash_sha256.update(chunk)
     return hash_sha256.hexdigest()[:cut]
 
-def addnet_hash_safetensors(b, cut=12): # for LoRA
+def addnet_hash_safetensors(b, cut=12):
     """kohya-ss hash for safetensors from https://github.com/kohya-ss/sd-scripts/blob/main/library/train_util.py"""
     hash_sha256 = hashlib.sha256()
     blksize = 1024 * 1024
@@ -107,13 +107,13 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
         try:
             load_dotenv("./env/.env")
         except:
-            env_loaded = False # not necessary
+            env_loaded = False
             print("Error! ./env/.env not loaded")
         else:
-            env_loaded = True # not necessary
+            env_loaded = True
             print("./env/.env loaded")
     
-    cycles = int(cycles) # necessary for right external value call
+    cycles = int(cycles)
     device_ = "cuda"
     if device_ == "cuda":
         torch.cuda.empty_cache()
@@ -122,12 +122,9 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
     else:
         clip_skip = int(clip_skip)
     if sd_xl:
-        torch_dtype_=torch.float16 # sd_xl and float32 are very slow
+        torch_dtype_=torch.float16
     else:
-        torch_dtype_=torch.float16 # float16 causes random black images sometimes
-
-    # login()
-    # pipeline = StableDiffusionPipeline.from_pretrained("hogiahien/aom3", torch_dtype=torch_dtype_, trust_remote_code=True)
+        torch_dtype_=torch.float16
         
     if sd_xl:
         checkpoint = os.getenv("checkpoint_xl", "juggernautXL_v7FP16VAEFix.safetensors")
@@ -139,18 +136,17 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
         model_hash=calculate_sha256(main_dir + "Stable-diffusion/1.5/" + checkpoint, 10)
 
     if no_vae:
-        vae_name = "" # for checkpoint with vae already baked in
-    elif sd_xl: #realistic and anime
+        vae_name = ""
+    elif sd_xl:
         vae_name = os.getenv("vae_name_xl", "sdxl_vae.safetensors")
     else:
-        vae_name = os.getenv("vae_name", "vae-ft-mse-840000-ema-pruned.ckpt") # for reality
+        vae_name = os.getenv("vae_name", "vae-ft-mse-840000-ema-pruned.ckpt")
 
     if vae_name != "":
-        vae = AutoencoderKL.from_single_file(main_dir + "VAE/" + vae_name, torch_dtype=torch_dtype_).to(device_) # torch.float16 gives random black image
+        vae = AutoencoderKL.from_single_file(main_dir + "VAE/" + vae_name, torch_dtype=torch_dtype_).to(device_)
         pipeline.vae = vae
         vae_hash=calculate_sha256(main_dir + "VAE/" + vae_name, 10)
 
-    # LoRA
     if sd_xl:
         model_path_lora = main_dir + "Lora/"
     else:
@@ -182,12 +178,9 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
                     txt_file_lora = txt_file_lora + ", " + os.path.splitext(os.path.basename(model_file_lora_single))[0] + ': ' + addnet_hash_safetensors(file, 12)
         txt_file_lora = txt_file_lora + '"'  
         pipeline.set_adapters(adapters, adapter_weights=adapter_weights)
-        # Fuses the LoRAs into the Unet
         pipeline.fuse_lora()
     else:
         txt_file_lora = ""   
-
-    # End Lora
         
     if not sd_xl:
         if clip_skip > 0:
@@ -200,7 +193,7 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
         Sampler = "LCM"
     else:
         eta = 0 
-        # if pipeline.scheduler == DDIMScheduler: eta = 0.31337
+
         euler_a = os.getenv("euler_a", "false").lower() == "true"
         if euler_a:
             pipeline.scheduler = EulerAncestralDiscreteScheduler.from_config(pipeline.scheduler.config)
@@ -213,8 +206,6 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
             else:
                 pipeline.scheduler = DPMSolverSinglestepScheduler.from_config(pipeline.scheduler.config, use_karras_sigmas='true')
                 Sampler = "DPM++ SDE Karras"
-
-    # pipeline.unet = torch.compile(pipeline.unet, mode="reduce-overhead", fullgraph=True) # RuntimeError: Windows not yet supported for torch.compile
 
     embeddings = os.getenv("embeddings", "").split(",")
     if embeddings[0] == "": 
@@ -262,9 +253,9 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
 
         if turbo_lcm:  
             if sd_xl:
-                guidance_scale = 2 # default = 2, sd_xl turbo with guidance scale = from 0 to 3.5
+                guidance_scale = 2
             else:
-                guidance_scale = 1.5 # default = 1.5, sd 1.5 lcm with guidance scale ~1.5
+                guidance_scale = 1.5
         else:
             guidance_scale = float(os.getenv("guidance_scale", "7"))
             if guidance_scale.is_integer():
@@ -272,12 +263,12 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
 
         if sd_xl:
             if turbo_lcm:
-                num_inference_steps_= 8 # 4 or 8 with turbo sd_xl lora, 8 or 16 with lcm sd_xl
+                num_inference_steps_= 8
             else:
                 num_inference_steps_= int(os.getenv("steps_xl", "80"))
         else: # 1.5
             if turbo_lcm:
-                num_inference_steps_= 16 # 8 or 16 with lcm 1.5 lora
+                num_inference_steps_= 16
             else:
                 num_inference_steps_= int(os.getenv("steps", "40"))
         if sd_xl:
@@ -327,9 +318,6 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
                 conditioning = compel.build_conditioning_tensor(prompt)
                 negative_conditioning = compel.build_conditioning_tensor(negative_prompt)
                 [conditioning, negative_conditioning] = compel.pad_conditioning_tensors_to_same_length([conditioning, negative_conditioning])
-        # else:
-            # if not sd_xl:
-            #    conditioning, negative_conditioning = get_pipeline_embeds(pipeline, prompt, negative_prompt, device_, truncation_option)
 
         if random_seed: 
             input_seed = random.randint(0, 9999999999)
@@ -356,14 +344,8 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
                     images = pipeline(prompt_embeds=conditioning, negative_prompt_embeds=negative_conditioning, generator=generator_, eta=eta, width=width_, height=height_, num_inference_steps=num_inference_steps_, guidance_scale=guidance_scale,
                         num_images_per_prompt=num_images_per_prompt_).images
             else:
-                # if sd_xl:
                     images = pipeline(prompt=prompt, negative_prompt=negative_prompt, generator=generator_, eta=eta, width=width_, height=height_, num_inference_steps=num_inference_steps_, guidance_scale=guidance_scale,
                         num_images_per_prompt=num_images_per_prompt_).images
-                # else:
-                #    images = pipeline(prompt_embeds=conditioning, negative_prompt_embeds=negative_conditioning, generator=generator_, eta=eta, width=width_, height=height_, num_inference_steps=num_inference_steps_, guidance_scale=guidance_scale,
-                #       num_images_per_prompt=num_images_per_prompt_).images
-
-
 
             end_time = time.time()
 
@@ -371,7 +353,7 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
 
             print(f"Time: {duration} seconds.")
 
-            if are_all_not_black(images) or pipeline.safety_checker != None: # with safety checker enabled higher probabily of black images
+            if are_all_not_black(images) or pipeline.safety_checker != None:
                 break
 
         if resize_pixel_w > 0:
@@ -382,8 +364,7 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
         if no_vae or vae_name == "":
            vae_string = ""
         else:
-            vae_string = ", VAE hash: " + vae_hash + ", VAE: "+ vae_name # vae_name with extension at the end!
-
+            vae_string = ", VAE hash: " + vae_hash + ", VAE: "+ vae_name
         txt_file_data = ""
         if model_file_lora[0] != "":
             i = 0
@@ -454,7 +435,7 @@ def main_def(env_loaded = False, env_file="", main_dir="./", prompt_input="", cy
             prompt_input = os.getenv("prompt_input","1girl")
 
         cycles = int(os.getenv("cycles", "10"))
-        dynamic_prompt = int(os.getenv("dynamic_prompt", "0")) # number means max new token, 64 = default, 0 = off
+        dynamic_prompt = int(os.getenv("dynamic_prompt", "0"))
 
     negative_prompt = os.getenv("negative_prompt", "")
     prompt_action = os.getenv("prompt_action", "false").lower() == "true"
@@ -485,7 +466,6 @@ def main_def(env_loaded = False, env_file="", main_dir="./", prompt_input="", cy
             directory_save=directory_save)
 
 if __name__ == "__main__":
-    ############ advanced option ############
     """
     if (len(sys.argv) == 3) and ((sys.argv[1] == "--audio") or (sys.argv[1] == "-audio") or (sys.argv[1] == "--a") or (sys.argv[1] == "-a")):
         descriptions_ = [sys.argv[2]]
@@ -518,7 +498,7 @@ if __name__ == "__main__":
             import subprocess
             subprocess.run(["attrib","+H","./env/merged_file.env"],check=True)
 
-        load_dotenv("./env/merged_file.env") # env_file overwrite env_file_base
+        load_dotenv("./env/merged_file.env")
         env_loaded = True
         print("merged_file.env loaded")
     elif len(sys.argv) == 2:
@@ -539,7 +519,7 @@ if __name__ == "__main__":
             import subprocess
             subprocess.run(["attrib","+H","./env/merged_file.env"],check=True)
 
-        load_dotenv("./env/merged_file.env") # env_file overwrite ./env/.env
+        load_dotenv("./env/merged_file.env")
         env_loaded = True
         print("merged_file.env loaded")   
     else:
@@ -555,7 +535,7 @@ if __name__ == "__main__":
 
     prompt_input = os.getenv("prompt_input","1girl")
     cycles = int(os.getenv("cycles", "10"))
-    dynamic_prompt = int(os.getenv("dynamic_prompt", "0")) # number means max new token, 64 = default, 0 = off
+    dynamic_prompt = int(os.getenv("dynamic_prompt", "0"))
     directory_save = ""
     main_dir=os.getenv("main_dir","./")
     if main_dir[-1] != "/":
