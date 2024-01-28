@@ -17,6 +17,7 @@ pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2 --ind
 - Put the sd 1.5/2.0/2.1 checkpoint that you use in .\models\1.5\
 - Put the sd xl LoRA that you use in .\models\Lora\
 - Put the sd 1.5/2.0/2.1 LoRA that you use in .\models\Lora\1.5\
+- Put the sd VAE that you use in .\models\VAE\
 - Put the sd negative embeddings that you use in .\models\embeddings\
 
 # Compel
