@@ -41,5 +41,3 @@ In the prompt/negative prompt you can use the "prompt weighting":
 
 # Support:
 - ko-fi: (https://ko-fi.com/shiroppo)
-- Patreon: (https://www.patreon.com/ai_image_env)
-
