@@ -252,28 +252,7 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
                 height_ = 768
             else: #1.5 lcm
                 width_ = 512
-                height_ = 768
-        elif random_dimension:
-            if sd_xl:          
-                width_ = random.choices([768, 832, 1216, 1344], weights=[0.4, 0.4, 0.1, 0.1], k=1)[0]
-                match width_:
-                    case 768:
-                        height_ = 1344
-                    case 832:
-                        height_ = 1216
-                    case 1216:
-                        height_ = 832
-                    case 1344:
-                        height_ = 768
-            else: #1.5
-                width_ = random.choices([512, 768, 1024], weights=[0.8, 0.1, 0.1], k=1)[0]
-                match width_:
-                    case 512:
-                        height_ = 768
-                    case 768:
-                        height_ = random.choice([512,1024])
-                    case 1024:
-                        height_ = 768              
+                height_ = 768          
         elif sd_xl:
             width_ = int(os.getenv("width_xl", "768"))
             height_ = int(os.getenv("height_xl", "1168"))
