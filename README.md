@@ -17,3 +17,7 @@ pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2 --ind
 .\venv\Scripts\activate
 py app_gradio.py
 ```
+You can modify/create new .env file and than put them into the env dir.
+Download from hugginface or any similar website every checkpoint than you use and put them into ./models/ if they are stable diffusion xl models or ./models/1.5 if they are stable diffusion 1.5/2.0/2.1 models
+Download from hugginface or any similar website every LoRA than you use and put them into ./models/LoRA if they are stable diffusion xl LoRA or ./models/1.5 if they are stable diffusion 1.5/2.0/2.1 LoRA
+Download from hugginface or any similar website every negative embedding than you use and put them into ./embeddings/
