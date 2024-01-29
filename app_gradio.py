@@ -93,4 +93,4 @@ if __name__ == "__main__":
         title="Image Create",
         allow_flagging="never"
     )
-    interface.launch(share=False)
+    interface.launch(share=False, inbrowser=True)
