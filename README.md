@@ -20,11 +20,12 @@ pip install -r requirements.txt
 pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu118
 ```
 # Run
-- Click on app_gradio.bat
+- click on app_gradio.bat
 - the interface is now open on the default browser, than select the .env file that you prefer(in ./env/ directory)
 - select the cycles(how many images you want)
 - click "Submit"
 - you can find the output in the ./image/_today_date_/ directory
+
 
 - Download from hugginface or any similar website every checkpoint that you use and put them into ./models/Stable-diffusion/ if they are stable diffusion xl models or ./models/Stable-diffusion/1.5/ if they are stable diffusion 1.5/2.0/2.1 models
 - Download from hugginface or any similar website every LoRA that you use and put them into ./models/LoRA if they are stable diffusion xl LoRA or ./models/1.5/ if they are stable diffusion 1.5/2.0/2.1 LoRA
