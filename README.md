@@ -26,8 +26,10 @@ pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2 --ind
 - click "Submit"
 - you can find the output in the ./image/_today_date_/ directory
 ---
-- Download from hugginface or any similar website every checkpoint that you use and put them into ./models/Stable-diffusion/ if they are stable diffusion xl models or ./models/Stable-diffusion/1.5/ if they are stable diffusion 1.5/2.0/2.1 models
-- Download from hugginface or any similar website every LoRA that you use and put them into ./models/Lora if they are stable diffusion xl LoRA or ./models/Lora/1.5/ if they are stable diffusion 1.5/2.0/2.1 LoRA
+- Download from hugginface or any similar website every checkpoint sd xl that you use and put them into ./models/Stable-diffusion/
+- Download from hugginface or any similar website every checkpoint sd 1.5/2.0/2.1 that you use and put them into ./models/Stable-diffusion/1.5/
+- Download from hugginface or any similar website every LoRA sd xl that you use and put them into ./models/Lora/
+- Download from hugginface or any similar website every LoRA sd 1.5/2.0/2.1 that you use and put them into ./models/Lora/1.5/
 - Download from hugginface or any similar website every VAE that you use and put them into ./models/VAE/
 - Download from hugginface or any similar website every negative embeddings that you use and put them into ./embeddings/
 ---
