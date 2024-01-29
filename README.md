@@ -21,7 +21,7 @@ pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2 --ind
 ```
 # Run
 - click on app_gradio.bat
-- the interface is now open on the default browser, than select the .env file that you prefer(in ./env/ directory)
+- the interface is now open on the default browser, than select the .env/.yaml file that you prefer(in ./env/ directory)
 - select the cycles(how many images you want)
 - click "Submit"
 - you can find the output in the ./image/_today_date_/ directory
