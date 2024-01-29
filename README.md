@@ -39,6 +39,11 @@ In the prompt/negative prompt you can use the "prompt weighting":
 ```
 - in this example the cat(+) is MORE important that the ball(-)
 
+# Files Compatibility:
+- .env
+- .yaml
+- .png(created with ai_image_env)
+
 # Versions
 - v1.0: First Version
 - v1.1: Added "Prompt" textbox, if empty the prompt is obtained from the selected *.env file
