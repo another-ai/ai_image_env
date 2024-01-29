@@ -39,8 +39,9 @@ In the prompt/negative prompt you can use the "prompt weighting":
 ```
 - in this example the cat(+) is MORE important that the ball(-)
 
-# Version
-- v1: First Version
+# Versions
+- v1.0: First Version
+- v1.1: Added "Prompt" textbox, if empty the prompt is obtained from the selected *.env file
 
 # Support:
 - ko-fi: (https://ko-fi.com/shiroppo)
