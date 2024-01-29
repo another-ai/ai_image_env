@@ -39,7 +39,7 @@ In the prompt/negative prompt you can use the "prompt weighting":
 ```
 - in this example the cat(+) is MORE important that the ball(-)
 
-# Files Compatibility:
+# Files input compatibility:
 - .env
 - .yaml
 - .png(created with ai_image_env)
