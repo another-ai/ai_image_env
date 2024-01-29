@@ -1,7 +1,7 @@
 import random
 def wildcard_scene_def(file_name, word, random_scene):
     if file_name != "":
-        directory_path = f"./src/wildcards/{file_name}.txt"
+        directory_path = f"./wildcards/{file_name}.txt"
         try:
             with open(directory_path, "r") as file:
                 if random_scene:
