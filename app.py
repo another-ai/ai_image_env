@@ -121,7 +121,10 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
         clip_skip = 1
     else:
         clip_skip = int(clip_skip)
-    if sd_xl:
+        
+    if device_ == "cpu":
+        torch_dtype_=torch.float32
+    elif sd_xl:
         torch_dtype_=torch.float16
     else:
         torch_dtype_=torch.float16
@@ -154,7 +157,7 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
             
     if turbo_lcm:
         if sd_xl:
-            model_file_lora = ["shiny_style_xl-turbo_v2.safetensors"]
+            model_file_lora = ["sd_xl_turbo_lora_v1.safetensors"]
         else:
             model_file_lora = ["LCM_LoRA_Weights_SD15.safetensors"]
     else:
