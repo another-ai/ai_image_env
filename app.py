@@ -25,7 +25,6 @@ def are_all_not_black(images):
 
 
 def is_completely_black(image):
-
     for pixel in image.getdata():
         if pixel != (0, 0, 0):
             return False
