@@ -45,7 +45,7 @@ In the prompt/negative prompt you can use the "prompt weighting":
 - .yaml
 - .png(created with ai_image_env)
 
-# Turbo mode(images ready in few seconds):
+# Turbo Mode(images ready in few seconds):
 In the selected .env:
 - turbo_lcm=true
 - for sd 1.5 checkpoint download the LoRA: https://huggingface.co/cleanmists/my/blob/61484b2d466b8a10349c5207981ea893e74f1c49/LCM_LoRA_Weights_SD15.safetensors and put it into ./models/Lora/1.5/
