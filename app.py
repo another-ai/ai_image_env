@@ -156,7 +156,7 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
             
     if turbo_lcm:
         if sd_xl:
-            model_file_lora = ["sd_xl_turbo_lora_v1.safetensors"]
+            model_file_lora = ["sd_xl_turbo_lora_v1-128dim.safetensors"]
         else:
             model_file_lora = ["LCM_LoRA_Weights_SD15.safetensors"]
     else:
