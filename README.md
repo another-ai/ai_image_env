@@ -54,6 +54,7 @@ In the selected .env:
 # Versions
 - v1.0: First Version
 - v1.1: Added "Prompt" textbox, if empty the prompt is obtained from the selected *.env file
-
+- v1.2: Added "Turbo Mode"
+  
 # Support:
 - ko-fi: (https://ko-fi.com/shiroppo)
