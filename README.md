@@ -4,7 +4,7 @@ A browser interface based on Gradio library for Stable Diffusion, input from .en
 ![](src/ai_image_env.png)
 
 # Installation:
-
+- METHOD 1:
 1. Install [Python 3.10.6](https://www.python.org/downloads/release/python-3106/), checking "Add Python to PATH".
 2. Install [git](https://git-scm.com/download/win).
 3. On terminal:
@@ -19,8 +19,12 @@ pip install -r requirements.txt
 ```bash
 pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu118
 ```
+- METHOD 2:
+1. Install [Python 3.10.6](https://www.python.org/downloads/release/python-3106/), checking "Add Python to PATH".
+2. Install [git](https://git-scm.com/download/win).
+3. Download and run [app_install.bat](https://github.com/another-ai/ai_image_env/blob/master/app_install.bat) in the directory of your choice.
 # Run
-- click on app_gradio.bat
+- click on app_gradio.bat on ai_image_env directory
 - the interface is now open on the default browser, than select the .env/.yaml file that you prefer(in ./env/ directory)
 - select the cycles(how many images you want)
 - click "Submit"
