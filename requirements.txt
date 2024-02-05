@@ -1,3 +1,4 @@
+accelerate-0.26.1
 compel==2.0.2
 diffusers==0.24.0
 gradio==4.12.0
