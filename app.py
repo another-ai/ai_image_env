@@ -151,7 +151,7 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
     # login()d
     # pipeline = StableDiffusionPipeline.from_pretrained("hogiahien/aom3", torch_dtype=torch_dtype_, trust_remote_code=True)
         
-    sd1_5_dir = os.getenv("sd1.5_dir", "false").lower() == "true"
+    sd1_5_dir = os.getenv("sd1_5_dir", "false").lower() == "true"
     if sd_xl:
         checkpoint = os.getenv("checkpoint_xl", "juggernautXL_v7FP16VAEFix.safetensors")
         pipeline = StableDiffusionXLPipeline.from_single_file(main_dir + "Stable-diffusion/" + checkpoint, torch_dtype=torch_dtype_, add_watermarker=False)
