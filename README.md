@@ -31,9 +31,9 @@ pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2 --ind
 - you can find the output in the ./image/_today_date_/ directory
 ---
 - Download from hugginface or any similar website every checkpoint sd xl that you use and put them into ./models/Stable-diffusion/
-- Download from hugginface or any similar website every checkpoint sd 1.5/2.0/2.1 that you use and put them into ./models/Stable-diffusion/1.5/
+- Download from hugginface or any similar website every checkpoint sd 1.5/2.0/2.1 that you use and put them into ./models/Stable-diffusion/
 - Download from hugginface or any similar website every LoRA sd xl that you use and put them into ./models/Lora/
-- Download from hugginface or any similar website every LoRA sd 1.5/2.0/2.1 that you use and put them into ./models/Lora/1.5/
+- Download from hugginface or any similar website every LoRA sd 1.5/2.0/2.1 that you use and put them into ./models/Lora/
 - Download from hugginface or any similar website every VAE that you use and put them into ./models/VAE/
 - Download from hugginface or any similar website every negative embeddings that you use and put them into ./embeddings/
 ---
@@ -56,7 +56,7 @@ Write `__name__` in your prompt to get a random line from a file named `name.txt
 #### (less quality, but more speed)
 In the selected .env:
 - turbo_lcm=true
-- for sd 1.5 checkpoint download the LoRA: https://huggingface.co/cleanmists/my/blob/61484b2d466b8a10349c5207981ea893e74f1c49/LCM_LoRA_Weights_SD15.safetensors and put it into ./models/Lora/1.5/
+- for sd 1.5 checkpoint download the LoRA: https://huggingface.co/cleanmists/my/blob/61484b2d466b8a10349c5207981ea893e74f1c49/LCM_LoRA_Weights_SD15.safetensors and put it into ./models/Lora/
 - for sd xl checkpoint download the LoRA: https://huggingface.co/shiroppo/sd_xl_turbo_lora/blob/main/sd_xl_turbo_lora_v1-128dim.safetensors and put it into ./models/Lora/
 
 # Versions
