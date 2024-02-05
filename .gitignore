@@ -4,6 +4,7 @@ __pycache__
 *.safetensors
 *.pt
 *.pth
+*.env
 /tmp
 /venv
 .venv
