@@ -49,6 +49,9 @@ In the prompt/negative prompt you can use the "prompt weighting":
 - .yaml
 - .png(created with ai_image_env)
 
+# Wildcards
+Write `__name__` in your prompt to get a random line from a file named `name.txt` in the ./wildcards directory.
+
 # Turbo Mode(images ready in few seconds):
 #### (less quality, but more speed)
 In the selected .env:
