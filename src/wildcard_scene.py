@@ -8,13 +8,11 @@ def wildcard_scene_def(file_name, word, random_scene):
                     lines = file.readlines()
                     if lines:
                         random_line = random.choice(lines)
-                        if ":" in random_line:
-                            return random_line.split(":", 1)[-1].strip() # Print everything after the first ':'
-                        else:
-                            return random_line.strip()
+                        return random_line.strip()
                     else:
                         print("The file is empty.")
                 else: # not random_scene
+                    """
                     for line in file:
                         if line.lower().startswith(word.lower()):
                             if ":" in line:
@@ -22,7 +20,8 @@ def wildcard_scene_def(file_name, word, random_scene):
                             else:
                                 return line.strip()
                     else:
-                        print(f"No lines starting with '{word}' found in the file.")
+                    """
+                    print(f"No lines starting with '{word}' found in the file.")
         except FileNotFoundError:
             print(f"The file {file_name}.txt was not found.")
     else:
