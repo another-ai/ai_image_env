@@ -1,7 +1,7 @@
 import os
 from datetime import datetime as date_time
 import re
-from PIL import Image
+from PIL import Image, ImageEnhance
 from PIL.PngImagePlugin import PngInfo
 
 def count_file(directory_path_temp):
@@ -36,12 +36,16 @@ def count_folders(directory_path_temp, new_folder):
         unique_id_temp = 1
     return str(unique_id_temp)
 
-def add_metadata_file(file_path, txt_file_data_file,env_file_text):
+def add_metadata_file(file_path, txt_file_data_file, env_file_text):
     targetImage = Image.open(file_path)
     metadata = PngInfo()
     metadata.add_text("parameters", txt_file_data_file)
     metadata.add_text("env", env_file_text)
     targetImage.save(file_path, pnginfo=metadata)
+
+def constrast_image(image_file, factor):
+    im_constrast = ImageEnhance.Contrast(image_file).enhance(factor)
+    return im_constrast
 
 def save_file(image_file, txt_file_data_file, new_folder, create_story, prompt="", env_file="", env_file_text=""):
     if env_file == "" or env_file[-5:] == "/.env" or env_file[-5:] == "\.env":
@@ -70,6 +74,7 @@ def save_file(image_file, txt_file_data_file, new_folder, create_story, prompt="
         unique_id = count_file(directory_path)
         file_name = f"{unique_id}_{current_time}.png"
         file_path = f"{directory_path}/{file_name}"
+        image_file = constrast_image(image_file, 1.65)
         image_file.save(file_path)
         add_metadata_file(file_path, txt_file_data_file, env_file_text)
     return file_path
@@ -94,7 +99,8 @@ def save_file_alt(image_file, txt_file_data_file, directory_save,env_file_text):
         unique_id = count_file(directory_path)
         file_name = f"{unique_id}_{current_time}.png"
         file_path = f"{directory_path}/{file_name}"
-        image_file.save(file_path)
+        image_file2 = constrast_image(image_file, 1.65)
+        image_file2.save(file_path)
         add_metadata_file(file_path, txt_file_data_file, env_file_text)
     return file_path
 
