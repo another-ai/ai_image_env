@@ -5,7 +5,6 @@ __pycache__
 *.pt
 *.pth
 *.env
-/tmp/*
-/env/*
-/venv/*
-
+/tmp
+/env
+/venv
