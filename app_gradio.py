@@ -1,5 +1,7 @@
+import sys
 import os
-import os
+path = os.path.abspath(".")
+sys.path.append(path)
 from PIL import Image
 import gradio as gr
 from dotenv import load_dotenv
