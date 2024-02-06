@@ -99,8 +99,8 @@ def save_file_alt(image_file, txt_file_data_file, directory_save,env_file_text):
         unique_id = count_file(directory_path)
         file_name = f"{unique_id}_{current_time}.png"
         file_path = f"{directory_path}/{file_name}"
-        image_file2 = constrast_image(image_file, 1.6)
-        image_file2.save(file_path)
+        image_file = constrast_image(image_file, 1.6)
+        image_file.save(file_path)
         add_metadata_file(file_path, txt_file_data_file, env_file_text)
     return file_path
 
