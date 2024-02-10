@@ -569,7 +569,7 @@ def main_def(env_loaded = False, env_file="./env/.env", main_dir="./", prompt_in
             dynamic_prompt = int(os.getenv("dynamic_prompt", "0")) # number means max new token, 64 = default, 0 = off
 
     negative_prompt = os.getenv("negative_prompt", "")
-    prompt_action = os.getenv("prompt_action", "true").lower() == "true"
+    prompt_action = os.getenv("prompt_action", "false").lower() == "true"
     sd_xl = os.getenv("sd_xl", "true").lower() == "true"
     clip_skip = int(os.getenv("clip_skip", "1"))
     turbo_lcm = os.getenv("turbo_lcm", "false").lower() == "true"
