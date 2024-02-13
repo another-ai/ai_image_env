@@ -143,10 +143,8 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
 
     if device_ == "cpu":
         torch_dtype_=torch.float32
-    elif sd_xl:
-        torch_dtype_=torch.float16 # sd_xl and float32 are very slow
     else:
-        torch_dtype_=torch.float16 # float16 causes random black images sometimes
+        torch_dtype_=torch.float16
 
     # login()d
     # pipeline = StableDiffusionPipeline.from_pretrained("hogiahien/aom3", torch_dtype=torch_dtype_, trust_remote_code=True)
