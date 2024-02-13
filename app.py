@@ -165,13 +165,13 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
 
     if no_vae:
         vae_name = "" # for checkpoint with vae already baked in
-    elif sd_xl: #realistic and anime
+    elif sd_xl:
         vae_name = os.getenv("vae_name_xl", "sdxl_vae.safetensors")
     else:
-        vae_name = os.getenv("vae_name", "vae-ft-mse-840000-ema-pruned.ckpt") # for reality
+        vae_name = os.getenv("vae_name", "vae-ft-mse-840000-ema-pruned.ckpt")
 
     if vae_name != "":
-        vae = AutoencoderKL.from_single_file(main_dir + "VAE/" + vae_name, torch_dtype=torch_dtype_).to(device_) # torch.float16 gives random black image
+        vae = AutoencoderKL.from_single_file(main_dir + "VAE/" + vae_name, torch_dtype=torch_dtype_).to(device_)
         pipeline.vae = vae
         vae_hash=calculate_sha256(main_dir + "VAE/" + vae_name, 10)
 
