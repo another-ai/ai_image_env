@@ -24,7 +24,7 @@ pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2 --ind
 2. Install [git](https://git-scm.com/download/win).
 3. Download and run [app_install.bat](https://github.com/another-ai/ai_image_env/blob/master/app_install.bat) in the directory of your choice.
 # Run
-- click on app_gradio.bat on ai_image_env directory
+- double click on app_gradio.bat on ai_image_env directory
 - the interface is now open on the default browser, than select the .env/.yaml file that you prefer(in ./env/ directory)
 - select the cycles(how many images you want)
 - click "Submit"
