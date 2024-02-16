@@ -330,7 +330,7 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
                 guidance_scale = 2.5 # default = 2.5, sd 1.5 lcm with guidance scale ~2.5
         else:
             guidance_scale = float(os.getenv("guidance_scale", "7"))
-            if guidance_scale.is_integer():
+            if float(guidance_scale).is_integer():
                 guidance_scale = int(guidance_scale)
 
         if sd_xl:
