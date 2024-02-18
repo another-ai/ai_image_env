@@ -146,7 +146,7 @@ def image_print(env_loaded, env_file, main_dir, prompt_action, prompt_input, neg
     else:
         torch_dtype_=torch.float16
 
-    # login()d
+    # login()
     # pipeline = StableDiffusionPipeline.from_pretrained("hogiahien/aom3", torch_dtype=torch_dtype_, trust_remote_code=True)
         
     sd1_5_dir = os.getenv("sd1_5_dir", "false").lower() == "true"
