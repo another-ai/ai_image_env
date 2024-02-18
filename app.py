@@ -606,12 +606,6 @@ def main_def(env_loaded = False, env_file="./env/.env", main_dir="./", prompt_in
 
 if __name__ == "__main__":
     ############ advanced option ############
-    """
-    if (len(sys.argv) == 3) and ((sys.argv[1] == "--audio") or (sys.argv[1] == "-audio") or (sys.argv[1] == "--a") or (sys.argv[1] == "-a")):
-        descriptions_ = [sys.argv[2]]
-        app_audio.main_def(descriptions_)
-    else:
-    """
     if os.path.isfile("./env/merged_file.env"):
         os.remove("./env/merged_file.env")
     try:
